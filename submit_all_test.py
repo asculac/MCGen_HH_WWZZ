@@ -8,7 +8,7 @@ Can sepecify either "cfg" : cmssw python config to be run using cmsRun, or "cmsD
 multi_conf_dict = {
 "HH_WWZZ_3l" : [
     { # LHE,GEN,SIM
-      "release": "CMSSW_10_2_16_patch1", 
+      "release": "CMSSW_10_2_17",  #originally CMSSW_10_2_16_patch1 but not available in cmsrel anymore
       "cmsDriver": 'cmsDriver.py Configuration/GenProduction/python/test_fragment_HH4V.py --python_filename HIG-RunIIFall18wmLHEGS-02890_3l_1_cfg.py --eventcontent RAWSIM,LHE  --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM,LHE --fileout file:HIG-RunIIFall18wmLHEGS-02890_3l.root --conditions 102X_upgrade2018_realistic_v11 --beamspot Realistic25ns13TeVEarly2018Collision --customise_commands process.RandomNumberGeneratorService.externalLHEProducer.initialSeed="int(24)" --step LHE,GEN,SIM --geometry DB:Extended --era Run2_2018  --no_exec  --mc ',
       "KeepOutput": False,
     },

@@ -48,7 +48,7 @@ For our example, first step is given in [Task1: HIG-RunIIFall18wmLHEGS-02890_0: 
 ```
 Locally, you can alter this command and test it. First you need to have the right CMSSW version (check JSON). In this case it is
 ``` bash
-cmsrel CMSSW_10_2_17  #should be CMSSW_10_2_16_patch1 but it is not available
+cmsrel CMSSW_10_2_22  #should be CMSSW_10_2_16_patch1 from the fragment but it is not available and for the purpose of the example we will use CMSSW_10_2_22 everywhere
 ```
 Then "install" your fragment in the CMSSW environment. 
 ``` bash

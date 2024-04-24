@@ -102,14 +102,14 @@ for idx in range(nof_entries):
         label += 'Z'
       elif abs(higgsDaughter.pdgId) == 24:
         label += 'W'
-      elif abs(higgsDaughter.pdgId) == 15:
-        label += 't'
+ #     elif abs(higgsDaughter.pdgId) == 15:
+ #       label += 't'
       else:
         print("Invalid Higgs daughter found: {}".format(higgsDaughter.pdgId))
 
-      if abs(higgsDaughter.pdgId) == 15:
-        # No point in checking the descendants of the tau lepton
-        continue
+  #    if abs(higgsDaughter.pdgId) == 15:
+  #      # No point in checking the descendants of the tau lepton
+  #      continue
 
       higgsGrandDaughters = find_daughters(higgsDaughter, genParts)
       assert(len(higgsGrandDaughters) == 2)
@@ -124,8 +124,8 @@ for idx in range(nof_entries):
           nof_quarks += 1
         elif abs(higgsGrandDaughter.pdgId) in [ 12, 14, 16 ]:
           nof_neutrinos += 1
-        # else:
-        #   print("Invalid Higgs granddaughter found: {}".format(higgsGrandDaughter.pdgId))
+        else:
+         print("Invalid Higgs granddaughter found: {}".format(higgsGrandDaughter.pdgId))
 
   label = ''.join(sorted(label))
   label+= ":{} L {} Q {} Nu {} Tau".format(nof_leptons,nof_quarks,nof_neutrinos, nof_tau)

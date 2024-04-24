@@ -29,46 +29,18 @@ multi_conf_dict = {
       "KeepOutput": True,
     },
     { # NANO
-      "release": "CMSSW_10_2_18", 
+      "release": "CMSSW_10_2_22", #v7
       "cmsDriver": 'cmsDriver.py --filein file:HIG-RunIIAutumn18MiniAOD-02460.root --fileout file:HIG-RunIIAutumn18NanoAODv6-02285.root --mc --eventcontent NANOAODSIM --datatier NANOAODSIM --conditions 102X_upgrade2018_realistic_v20 --step NANO --nThreads 2 --era Run2_2018,run2_nanoAOD_102Xv1 --python_filename HIG-RunIIFall18wmLHEGS-02890_3l_5_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring',
       "KeepOutput": True,
     },
 ],
-"HH_WWZZ_3l_config" : [ 
-    {
-      "release": "CMSSW_10_2_16_patch1",
-      "cfg": "HIG-RunIIFall18wmLHEGS-02890_3l_1_cfg.py",
-      "KeepOutput": False,
-    },
-    {
-      "release": "CMSSW_10_2_5",
-      "cfg": "HIG-RunIIFall18wmLHEGS-02890_3l_2_cfg.py",
-      "KeepOutput": False,
-    },
-    {
-      "release": "CMSSW_10_2_5",
-      "cfg": "HIG-RunIIFall18wmLHEGS-02890_3l_3_cfg.py",
-      "KeepOutput": False,
-    },
-    {
-      "release": "CMSSW_10_2_5",
-      "cfg": "HIG-RunIIFall18wmLHEGS-02890_3l_4_cfg.py",
-      "KeepOutput": True,
-    },
-    {
-      "release": "CMSSW_10_2_18",
-      "cfg": "HIG-RunIIFall18wmLHEGS-02890_3l_5_cfg.py",
-      "KeepOutput": True,
-    },
-],
+
 
 }
 
 def findCmsswRelease(releaseName:str) -> str:
     """ Finds CMSSW release location (created with cmsrel). Returns path to src folder, ie  /grid_mnt/data__data.polcms/cms/cuisset/ZHbbtautau/cmsReleases/CMSSW_10_2_22/src/ """
-    bases = ["/grid_mnt/data__data.polcms/cms/vernazza/MCProduction/2023_11_14",
-             "/grid_mnt/data__data.polcms/cms/cuisset/ZHbbtautau/cmsReleases"
-             "/grid_mnt/data__data.polcms/cms/asculac/"]
+    bases = ["/grid_mnt/data__data.polcms/cms/asculac/MCProduction/CMSSW_versions)"]
     for base in bases:
         pathToSrc = os.path.join(base, releaseName, "src")
         if os.path.isdir(pathToSrc):

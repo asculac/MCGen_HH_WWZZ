@@ -17,11 +17,7 @@ multi_conf_dict = {
       "cmsDriver": 'cmsDriver.py --python_filename HIG-RunIIFall18wmLHEGS-02890_3l_2_cfg.py --eventcontent PREMIXRAW --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM-RAW --fileout file:HIG-RunIIAutumn18DRPremix-02460_3l_step1.root --pileup_input dbs:/Neutrino_E-10_gun/RunIISummer17PrePremix-PUAutumn18_102X_upgrade2018_realistic_v15-v1/GEN-SIM-DIGI-RAW --conditions 102X_upgrade2018_realistic_v15 --step DIGI,DATAMIX,L1,DIGI2RAW,HLT:@relval2018 --procModifiers premix_stage2 --nThreads 8 --geometry DB:Extended --filein file::HIG-RunIIFall18wmLHEGS-02890_3l.root --datamix PreMix --era Run2_2018 --no_exec --mc ',
       "KeepOutput": False,
     },
-    # { # HLT
-    #   "release": "CMSSW_10_2_5",
-    #   "cmsDriver": 'cmsDriver.py  --python_filename EGM-RunIISummer20UL18HLT-00002_1_cfg.py --eventcontent RAWSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM-RAW --fileout file:EGM-RunIISummer20UL18HLT-00002.root --conditions 102X_upgrade2018_realistic_v15 --customise_commands \'process.source.bypassVersionCheck = cms.untracked.bool(True)\' --step HLT:2018v32 --geometry DB:Extended --filein file:EGM-RunIISummer20UL18DIGIPremix-00002.root --era Run2_2018 --mc',
-    #    "KeepOutput": False,
-    # },
+
     { # RECO
       "release": "CMSSW_10_2_5",
       "cmsDriver": 'cmsDriver.py --filein file:HIG-RunIIAutumn18DRPremix-02460_3l_step1.root --fileout file:HIG-RunIIAutumn18DRPremix-02460.root --mc --eventcontent AODSIM --runUnscheduled --datatier AODSIM --conditions 102X_upgrade2018_realistic_v15 --step RAW2DIGI,L1Reco,RECO,RECOSIM,EI --procModifiers premix_stage2 --nThreads 8 --era Run2_2018 --python_filename HIG-RunIIFall18wmLHEGS-02890_3l_3_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring',
@@ -33,12 +29,12 @@ multi_conf_dict = {
       "KeepOutput": True,
     },
     { # NANO
-      "release": "CMSSW_10_2_18", # nanoaod twiki says CMSSW_10_6_27, DY prod used CMSSW_10_6_26 + changed NANOEDMAODSIM to NANOAODSIM
+      "release": "CMSSW_10_2_18", 
       "cmsDriver": 'cmsDriver.py --filein file:HIG-RunIIAutumn18MiniAOD-02460.root --fileout file:HIG-RunIIAutumn18NanoAODv6-02285.root --mc --eventcontent NANOAODSIM --datatier NANOAODSIM --conditions 102X_upgrade2018_realistic_v20 --step NANO --nThreads 2 --era Run2_2018,run2_nanoAOD_102Xv1 --python_filename HIG-RunIIFall18wmLHEGS-02890_3l_5_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring',
       "KeepOutput": True,
     },
 ],
-"HH_WWZZ_3l_config" : [ # first version of ZtautauHbb config, uses MiniAODv1 which causes problems for nanoAOD production later on
+"HH_WWZZ_3l_config" : [ 
     {
       "release": "CMSSW_10_2_16_patch1",
       "cfg": "HIG-RunIIFall18wmLHEGS-02890_3l_1_cfg.py",

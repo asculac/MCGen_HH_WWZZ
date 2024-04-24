@@ -40,7 +40,7 @@ multi_conf_dict = {
 
 def findCmsswRelease(releaseName:str) -> str:
     """ Finds CMSSW release location (created with cmsrel). Returns path to src folder, ie  /grid_mnt/data__data.polcms/cms/cuisset/ZHbbtautau/cmsReleases/CMSSW_10_2_22/src/ """
-    bases = ["/grid_mnt/data__data.polcms/cms/asculac/MCProduction/CMSSW_versions)"]
+    bases = ["/grid_mnt/data__data.polcms/cms/asculac/MCProduction/CMSSW_versions"]
     for base in bases:
         pathToSrc = os.path.join(base, releaseName, "src")
         if os.path.isdir(pathToSrc):

@@ -67,8 +67,50 @@ Simply do:
 ``` bash
 cmsDriver.py Configuration/GenProduction/python/test_fragment_HH4V.py --fileout file:HIG-RunIIFall18wmLHEGS-02890_3l.root --mc --eventcontent RAWSIM,LHE --datatier GEN-SIM,LHE --conditions 102X_upgrade2018_realistic_v11 --beamspot Realistic25ns13TeVEarly2018Collision --step LHE,GEN,SIM --geometry DB:Extended --era Run2_2018 --python_filename HIG-RunIIFall18wmLHEGS-02890_1_3l_Step0_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 10
 ```
+Then:
 ``` bash
 cmsRun HIG-RunIIFall18wmLHEGS-02890_1_3l_Step0_cfg.py
 ```
-This will use my test_fragment_HH4V.py (produced and installed in CMSSW in previous steps) and generate RAWSIM&LHE root files which will later be used in next step.
+This will use my [test_fragment_HH4V.py](https://github.com/asculac/MCGen_HH_WWZZ/blob/main/gridpack_ggHH4V/fragments/test_fragment_HH4V.py) (produced and installed in CMSSW in previous steps) and generate GEN/SIM root file which will later be used in next step.
 
+### STEP 1
+Now we are using the output of the previous step (HIG-RunIIFall18wmLHEGS-02890_3l.root) to produce the RAW root file. Simpy do:
+``` bash
+cmsDriver.py step1 --python_filename HIG-RunIIFall18wmLHEGS-02890_1_cfg.py --filein file:HIG-RunIIFall18wmLHEGS-02890_3l.root --fileout file:HIG-RunIIAutumn18DRPremix-02460_3l_step1.root --pileup_input dbs:/Neutrino_E-10_gun/RunIISummer17PrePremix-PUAutumn18_102X_upgrade2018_realistic_v15-v1/GEN-SIM-DIGI-RAW --mc --eventcontent PREMIXRAW --datatier GEN-SIM-RAW --conditions 102X_upgrade2018_realistic_v15 --step DIGI,DATAMIX,L1,DIGI2RAW,HLT:@relval2018 --procModifiers premix_stage2 --nThreads 8 --geometry DB:Extended --datamix PreMix --era Run2_2018 --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 10
+```
+Then:
+``` bash
+cmsRun HIG-RunIIFall18wmLHEGS-02890_1_cfg.py
+```
+which will produce the root file.
+
+### STEP 2
+Same as previous step, we are using the RECO root output file from previous step HIG-RunIIAutumn18DRPremix-02460_3l_step1.root to generate the RECO root file.
+``` bash
+cmsDriver.py step2 --filein file:HIG-RunIIAutumn18DRPremix-02460_3l_step1.root --fileout file:HIG-RunIIAutumn18DRPremix-02460.root --mc --eventcontent AODSIM --runUnscheduled --datatier AODSIM --conditions 102X_upgrade2018_realistic_v15 --step RAW2DIGI,L1Reco,RECO,RECOSIM,EI --procModifiers premix_stage2 --nThreads 8 --era Run2_2018 --python_filename HIG-RunIIAutumn18DRPremix-02460_2_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 10
+```
+Then:
+``` bash
+cmsRun HIG-RunIIAutumn18DRPremix-02460_2_cfg.py
+```
+
+### STEP 3
+RECO root file HIG-RunIIAutumn18DRPremix-02460.root to miniAOD.
+``` bash
+cmsDriver.py step3 --filein file:HIG-RunIIAutumn18DRPremix-02460.root --fileout file:HIG-RunIIAutumn18MiniAOD-02460.root --mc --eventcontent MINIAODSIM --runUnscheduled --datatier MINIAODSIM --conditions 102X_upgrade2018_realistic_v15 --step PAT --nThreads 8 --geometry DB:Extended --era Run2_2018 --python_filename HIG-RunIIAutumn18MiniAOD-02474_3_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 10
+```
+Then:
+``` bash
+cmsRun HIG-RunIIAutumn18MiniAOD-02474_3_cfg.py
+```
+
+### STEP 4
+``` bash
+cmsDriver.py step4 --filein file:HIG-RunIIAutumn18MiniAOD-02460.root --fileout file:HIG-RunIIAutumn18NanoAODv6-02285.root --mc --eventcontent NANOAODSIM --datatier NANOAODSIM --conditions 102X_upgrade2018_realistic_v20 --step NANO --nThreads 2 --era Run2_2018,run2_nanoAOD_102Xv1 --python_filename HIG-RunIIAutumn18NanoAODv7-02285_1_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 10
+```
+Then:
+``` bash
+cmsRun HIG-RunIIAutumn18NanoAODv7-02285_1_cfg.py
+```
+
+After sucesfully running all of the steps you should have your baby nanoAOD file (with 10 events if you kept -n 10 option)!

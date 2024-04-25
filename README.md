@@ -118,3 +118,28 @@ cmsRun HIG-RunIIAutumn18NanoAODv7-02285_1_cfg.py
 ```
 
 After sucesfully running all of the steps you should have your baby nanoAOD file (with 10 events if you kept -n 10 option)!
+
+## LAUNCHING JOBS AT LLR
+
+Before running jobs one needs to source the t3setup and make sure to run voms to have grid certificate ready:
+``` bash
+source /opt/exp_soft/cms/t3/t3setup
+voms-proxy-init --rfc --voms cms -valid 192:00
+```
+The script to launch the jobs is available [here](https://github.com/asculac/MCGen_HH_WWZZ/blob/main/submit_all_test.py)
+In the multi_conf_dict dictionary you can add the commands per each STEP in your production. The one for 3l Run2 are already available in "HH_WWZZ_3l" (be carefull here to add all the correct CMSSW version which you find in the JSON from ReqMgr).
+You should also provide the path where you will install all the CMSSW that need to be used in the production. Define it [here](https://github.com/asculac/MCGen_HH_WWZZ/blob/main/submit_all_test.py#L43) where you can add your new path:
+```python
+ bases = ["/grid_mnt/data__data.polcms/cms/asculac/MCProduction/CMSSW_versions"]
+```
+After that your submit python script is ready to be launched. To test it, you can launch it (for the example of HH_WWZZ_3l) just for 1 job with 10 events with command (NB: change the --base to path where you want to store your samples):
+``` bash
+python3 submit_all_test.py --grid /home/llr/cms/skulac/MCGen_HH_WWZZ/MCGen_HH_WWZZ/gridpack_ggHH4V/ggHH_EWChL_slc6_amd64_gcc700_CMSSW_10_2_5_patch1_my_ggHH_EWChL.tgz
+--process HH_WWZZ_3l
+--maxEvents 10 --nJobs 1
+--start_from 0
+--queue long
+--base /data_CMS/cms/asculac/MCProduction/OutputSamples/2024_24_04/ggHH_WWZZ_3
+```
+
+Later, you can add the --resubmit command to resubmit the failed jobs (if you want to first check which jobs failed, add --resubmit --no_exec)

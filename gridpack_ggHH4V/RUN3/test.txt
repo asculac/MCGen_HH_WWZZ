@@ -1,1 +1,3 @@
 #This is a Run3 WWZZ production subfolder containing the inclusive ggHH gridpack with corresponding 4V, WWZZ_3l, WWZZ_4l and WWZZ_4lplus fragments
+# use the central gridpack, available at
+# /cvmfs/cms.cern.ch/phys_generator/gridpacks/RunIII/13p6TeV/slc7_amd64_gcc10/Powheg/V2/ggHH_slc7_amd64_gcc10_CMSSW_12_4_13_patch1_aworkdir2.tgz
